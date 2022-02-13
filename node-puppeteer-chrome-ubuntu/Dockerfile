@@ -14,8 +14,6 @@ RUN mkdir -p /etc/default && echo 'repo_add_once=false' > /etc/default/google-ch
 # Note: this also installs the necessary libs to make the bundled version of Chromium that Puppeteer installs work.
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y wget gnupg unzip ca-certificates --no-install-recommends \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y npm \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | DEBIAN_FRONTEND=noninteractive apt-key add - \
     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
@@ -73,8 +71,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && chmod 1777 /tmp/.X11-unix
 
 # Trying to solve error issue 
+RUN noninteractive apt-get install -y nodejs
+RUN noninteractive apt-get install -y npm
 RUN npm cache clean --force
-RUN npm install
 RUN npm cache verify
 RUN npm i -g npm
 
