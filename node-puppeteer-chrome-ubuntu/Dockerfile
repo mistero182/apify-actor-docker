@@ -73,6 +73,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 # Trying to solve error issue 
 RUN DEBIAN_FRONTEND=noninteractive apt update
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq nodejs
+RUN node -v
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq npm
 RUN npm cache clean --force
 RUN npm cache verify
