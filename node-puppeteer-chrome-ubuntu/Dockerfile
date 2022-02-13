@@ -73,10 +73,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 # Trying to solve error issue 
 RUN DEBIAN_FRONTEND=noninteractive apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt install curl -y
+# RUN DEBIAN_FRONTEND=noninteractive apt install -yq nodejs
+RUN curl -sL https://deb.nodesource.com/setup_17.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq nodejs
-# RUN curl -sL https://deb.nodesource.com/setup_17.x -o nodesource_setup.sh
-# RUN bash nodesource_setup.sh
-# RUN DEBIAN_FRONTEND=noninteractive apt install nodejs
 
 RUN node -v
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq npm
