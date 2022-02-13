@@ -71,8 +71,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && chmod 1777 /tmp/.X11-unix
 
 # Trying to solve error issue 
-RUN noninteractive apt-get install -y nodejs
-RUN noninteractive apt-get install -y npm
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y npm
 RUN npm cache clean --force
 RUN npm cache verify
 RUN npm i -g npm
