@@ -74,17 +74,19 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 RUN DEBIAN_FRONTEND=noninteractive apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt upgrade -y
 RUN DEBIAN_FRONTEND=noninteractive apt install curl -y
-# RUN DEBIAN_FRONTEND=noninteractive apt install -yq nodejs
+
 RUN curl -sL https://deb.nodesource.com/setup_17.x -o nodesource_setup.sh
 RUN bash nodesource_setup.sh
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq nodejs
 
-RUN node -v
-RUN npm --version
 # RUN DEBIAN_FRONTEND=noninteractive apt install -y npm
-RUN npm cache clean --force
-RUN npm cache verify
-RUN npm i -g npm
+#RUN npm cache clean --force
+#RUN npm cache verify
+#RUN npm i -g npm
+
+RUN apt install nodejs-legacy -y
+
+RUN DEBIAN_FRONTEND=noninteractive apt install build-essential -y
 
 
 # Globally disable the update-notifier.
@@ -98,6 +100,7 @@ COPY package.json puppeteer_*.js /tmp/chrome-install/
 # Install default dependencies
 RUN npm --quiet set progress=false \
     && npm install --only=prod --no-optional --no-package-lock --prefer-online
+
 
 # Download the latest Chrome
 RUN node ./puppeteer_download.js
