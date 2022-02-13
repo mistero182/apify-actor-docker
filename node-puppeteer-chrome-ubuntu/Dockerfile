@@ -72,8 +72,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && mkdir -p /tmp/.X11-unix \
     && chmod 1777 /tmp/.X11-unix
 
-# Globally disable the update-notifier.
+# Trying to solve error issue 
 RUN npm cache clean --force
+RUN npm install
+RUN npm cache verify
+RUN npm i -g npm
+
 
 # Globally disable the update-notifier.
 RUN npm config --global set update-notifier false
