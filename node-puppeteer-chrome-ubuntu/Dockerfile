@@ -80,7 +80,8 @@ RUN bash nodesource_setup.sh
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq nodejs
 
 RUN node -v
-RUN DEBIAN_FRONTEND=noninteractive apt install -y npm
+RUN npm --version
+# RUN DEBIAN_FRONTEND=noninteractive apt install -y npm
 RUN npm cache clean --force
 RUN npm cache verify
 RUN npm i -g npm
